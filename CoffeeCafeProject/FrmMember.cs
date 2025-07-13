@@ -33,6 +33,7 @@ namespace CoffeeCafeProject
             {
                 try
                 {
+                    sqlConnection.Open();
                     string strSQL = "select memberId, memberPhone, memberName, memberScore from member_tb";
                     using (SqlDataAdapter dataAdapter = new SqlDataAdapter(strSQL, sqlConnection))
                     {
