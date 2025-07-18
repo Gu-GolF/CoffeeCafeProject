@@ -26,8 +26,8 @@ namespace CoffeeCafeProject
         private void getAllMenuToListView()
         {
             //กำหนด connection string เพื่อติดต่อไปยัง Database
-            string connectionString = @"Server=DESKTOP-9U4FO0V\SQLEXPRESS;Database=coffee_cafe_db;Trusted_Connection=True;";
-
+            //string connectionString = @"Server=DESKTOP-9U4FO0V\SQLEXPRESS;Database=coffee_cafe_db;Trusted_Connection=True;";
+            string connectionString = @"Server=DESKTOP-HMDSMC8\SQLEXPRESS;Database=coffee_cafe_db;Trusted_Connection=True;";
             //สร้าง connection
             using (SqlConnection sqlConnection = new SqlConnection(connectionString))
             {
@@ -136,7 +136,8 @@ namespace CoffeeCafeProject
         {
             if (MessageBox.Show("ต้องการลบหรือไม่", "ยืนยัน", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
-                string connectionString = @"Server=DESKTOP-9U4FO0V\SQLEXPRESS;Database=coffee_cafe_db;Trusted_Connection=True;";
+                //string connectionString = @"Server=DESKTOP-9U4FO0V\SQLEXPRESS;Database=coffee_cafe_db;Trusted_Connection=True;";
+                string connectionString = @"Server=DESKTOP-HMDSMC8\SQLEXPRESS;Database=coffee_cafe_db;Trusted_Connection=True;";
                 using (SqlConnection sqlConnection = new SqlConnection(connectionString))
                 {
                     try
@@ -189,8 +190,8 @@ namespace CoffeeCafeProject
             }
 
 
-            string connectionString = @"Server=DESKTOP-9U4FO0V\SQLEXPRESS;Database=coffee_cafe_db;Trusted_Connection=True;";
-
+            //string connectionString = @"Server=DESKTOP-9U4FO0V\SQLEXPRESS;Database=coffee_cafe_db;Trusted_Connection=True;";
+            string connectionString = @"Server=DESKTOP-HMDSMC8\SQLEXPRESS;Database=coffee_cafe_db;Trusted_Connection=True;";
             using (SqlConnection sqlConnection = new SqlConnection(connectionString))
             {
                 try
@@ -255,8 +256,8 @@ namespace CoffeeCafeProject
             {
                 //บันทึกลง db
 
-                string connectionString = @"Server=DESKTOP-9U4FO0V\SQLEXPRESS;Database=coffee_cafe_db;Trusted_Connection=True;";
-
+                //string connectionString = @"Server=DESKTOP-9U4FO0V\SQLEXPRESS;Database=coffee_cafe_db;Trusted_Connection=True;";
+                string connectionString = @"Server=DESKTOP-HMDSMC8\SQLEXPRESS;Database=coffee_cafe_db;Trusted_Connection=True;";
                 //สร้าง connection
                 using (SqlConnection sqlConnection = new SqlConnection(connectionString))
                     try

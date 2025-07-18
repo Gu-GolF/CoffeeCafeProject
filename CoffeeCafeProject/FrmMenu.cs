@@ -51,7 +51,9 @@ namespace CoffeeCafeProject
         private void getAllMenuToListView()
         {
             //Connect String เพื่อติดต่อไปยังฐานข้อมูล
-            string connectionString = @"Server=DESKTOP-9U4FO0V\SQLEXPRESS;Database=coffee_cafe_db;Trusted_Connection=True;";
+            //string connectionString = @"Server=DESKTOP-9U4FO0V\SQLEXPRESS;Database=coffee_cafe_db;Trusted_Connection=True;";
+            string connectionString = @"Server=DESKTOP-HMDSMC8\SQLEXPRESS;Database=coffee_cafe_db;Trusted_Connection=True;";
+        
             //สร้าง Connection ไปยังฐานข้อมูล
             using (SqlConnection sqlConnection = new SqlConnection(connectionString))
             {
@@ -226,8 +228,8 @@ namespace CoffeeCafeProject
             {
                 //บันทึกฐานข้อมูล
                 //Connect String เพื่อติดต่อไปยังฐานข้อมูล
-                string connectionString = @"Server=DESKTOP-9U4FO0V\SQLEXPRESS;Database=coffee_cafe_db;Trusted_Connection=True;";
-
+                //string connectionString = @"Server=DESKTOP-9U4FO0V\SQLEXPRESS;Database=coffee_cafe_db;Trusted_Connection=True;";
+                string connectionString = @"Server=DESKTOP-HMDSMC8\SQLEXPRESS;Database=coffee_cafe_db;Trusted_Connection=True;";
                 using (SqlConnection sqlConnection = new SqlConnection(connectionString))
                 {
                     try
@@ -316,8 +318,8 @@ namespace CoffeeCafeProject
             {
                 //ลบออกจาก  database
                 //ลบข้อมูลสินค้าออกจากตารางใน DB
-                string connectionString = @"Server=DESKTOP-9U4FO0V\SQLEXPRESS;Database=coffee_cafe_db;Trusted_Connection=True;";
-
+                //string connectionString = @"Server=DESKTOP-9U4FO0V\SQLEXPRESS;Database=coffee_cafe_db;Trusted_Connection=True;";
+                string connectionString = @"Server=DESKTOP-HMDSMC8\SQLEXPRESS;Database=coffee_cafe_db;Trusted_Connection=True;";
                 using (SqlConnection sqlConnection = new SqlConnection(connectionString))
                 {
                     try
@@ -375,8 +377,8 @@ namespace CoffeeCafeProject
             {
                 //บันทึกลงฐานข้อมูล
                 //กำหนด Connect String เพื่อติดต่อไปยังฐานข้อมูล
-                string connectionString = @"Server=DESKTOP-9U4FO0V\SQLEXPRESS;Database=coffee_cafe_db;Trusted_Connection=True;";
-
+                //string connectionString = @"Server=DESKTOP-9U4FO0V\SQLEXPRESS;Database=coffee_cafe_db;Trusted_Connection=True;";
+                string connectionString = @"Server=DESKTOP-HMDSMC8\SQLEXPRESS;Database=coffee_cafe_db;Trusted_Connection=True;";
                 //สร้าง Connection ไปยังฐานข้อมูล
                 using (SqlConnection sqlConnection = new SqlConnection(connectionString))
                 {

@@ -56,8 +56,8 @@ namespace CoffeeCafeProject
             lvOrderMenu.Columns.Add("ราคา", 80, HorizontalAlignment.Left);
             //ดึงข้อมูลรายการเมนูจาก Database มาแสดงที่หน้าจอ และเก็บไว้ใช้กับตอนที่ผู็ใช้เลือกเสั่งเมนู
             //กำหนด connection string เพื่อติดต่อไปยัง Database
-            string connectionString = @"Server=DESKTOP-9U4FO0V\SQLEXPRESS;Database=coffee_cafe_db;Trusted_Connection=True;";
-
+            //string connectionString = @"Server=DESKTOP-9U4FO0V\SQLEXPRESS;Database=coffee_cafe_db;Trusted_Connection=True;";
+            string connectionString = @"Server=DESKTOP-HMDSMC8\SQLEXPRESS;Database=coffee_cafe_db;Trusted_Connection=True;";
             //สร้าง connection
             using (SqlConnection sqlConnection = new SqlConnection(connectionString))
             {
@@ -147,8 +147,8 @@ namespace CoffeeCafeProject
             //แล้วชื่อกับแต้มมาโชว์ ส่วนรหัสเอาไว้ใช้บันทึกลง Database
             if (e.KeyCode == Keys.Enter)
             {
-                string connectionString = @"Server=DESKTOP-9U4FO0V\SQLEXPRESS;Database=coffee_cafe_db;Trusted_Connection=True;";
-
+                //string connectionString = @"Server=DESKTOP-9U4FO0V\SQLEXPRESS;Database=coffee_cafe_db;Trusted_Connection=True;";
+                string connectionString = @"Server=DESKTOP-HMDSMC8\SQLEXPRESS;Database=coffee_cafe_db;Trusted_Connection=True;";
                 //สร้าง connection
                 using (SqlConnection sqlConnection = new SqlConnection(connectionString))
                 {
@@ -443,8 +443,8 @@ namespace CoffeeCafeProject
                 //1. บันทึกเพิ่มลง order_tb (INSERT INTO......)
                 //2. บันทึกเพิ่มลง order_detail_tb (INSERT INTO......)
                 //3. บันทึกแก้ไขแต้มคะแนนของสมาชิก member_tb กรณีเป็นสมาชิก (UPDATE... SET...)
-                string connectionString = @"Server=DESKTOP-9U4FO0V\SQLEXPRESS;Database=coffee_cafe_db;Trusted_Connection=True;";
-
+                //string connectionString = @"Server=DESKTOP-9U4FO0V\SQLEXPRESS;Database=coffee_cafe_db;Trusted_Connection=True;";
+                string connectionString = @"Server=DESKTOP-HMDSMC8\SQLEXPRESS;Database=coffee_cafe_db;Trusted_Connection=True;";
                 //สร้าง connection
                 using (SqlConnection sqlConnection = new SqlConnection(connectionString))
                     try
@@ -480,7 +480,7 @@ namespace CoffeeCafeProject
                             {
                                 sqlCommand.Parameters.Add("@orderId", SqlDbType.Int).Value = orderId;
                                 sqlCommand.Parameters.Add("@menuName", SqlDbType.VarChar, 100).Value = item.SubItems[0].Text;
-                                sqlCommand.Parameters.Add("@menuPrice", SqlDbType.Float).Value = float.Parse( item.SubItems[1].Text);
+                                sqlCommand.Parameters.Add("@menuPrice", SqlDbType.Float).Value = float.Parse(item.SubItems[1].Text);
 
                                 sqlCommand.ExecuteNonQuery();
 
@@ -491,13 +491,13 @@ namespace CoffeeCafeProject
                         //แก้ไข MemberScore ที่ member_tb --------------
                         if (rdMemberYes.Checked == true)
                         {
-                            string strSQL3 = "UPDATE member_tb SET memberScore = @memberScore WHERE memberId = @memberId"; 
-                               
+                            string strSQL3 = "UPDATE member_tb SET memberScore = @memberScore WHERE memberId = @memberId";
+
                             using (SqlCommand sqlCommand = new SqlCommand(strSQL3, sqlConnection, sqlTransaction))
                             {
                                 sqlCommand.Parameters.Add("@memberScore", SqlDbType.Int).Value = int.Parse(lbMemberScore.Text);
                                 sqlCommand.Parameters.Add("@memberId", SqlDbType.Int).Value = memberId;
-                               
+
 
                                 sqlCommand.ExecuteNonQuery();
 
@@ -516,6 +516,47 @@ namespace CoffeeCafeProject
                     {
                         MessageBox.Show("พบข้อผิดพลาด กรุณาลองใหม่หรือติดต่อ IT:" + ex.Message);
                     }
+            }
+        }
+
+        private void lvOrderMenu_ItemActivate(object sender, EventArgs e)
+        {
+            // ตรวจสอบว่ามีรายการถูกเลือกอยู่หรือไม่
+            if (lvOrderMenu.SelectedItems.Count > 0)
+            {
+                ListViewItem selectedItem = lvOrderMenu.SelectedItems[0];
+
+                // ดึงราคาสินค้าจาก SubItem ที่ 1 (คอลัมน์ที่สอง)
+                float itemPrice = float.Parse(selectedItem.SubItems[1].Text);
+
+                // ลบรายการออกจาก ListView
+                lvOrderMenu.Items.Remove(selectedItem);
+
+                // ลดแต้ม ถ้าเป็นสมาชิก
+                if (tbMemberName.Text != "(ชื่อสมาชิก)")
+                {
+                    int point = int.Parse(lbMemberScore.Text);
+                    if (point > 0)
+                        lbMemberScore.Text = (point - 1).ToString();
+                }
+
+                // ลดยอดรวมราคา
+                float currentTotal = float.Parse(lbOrderPay.Text);
+                lbOrderPay.Text = (currentTotal - itemPrice).ToString("0.00");
+            }
+
+        }
+
+        private void tbMemberPhone_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+
+            if (char.IsDigit(e.KeyChar) && ((sender as TextBox).Text.Length >= 10))
+            {
+                e.Handled = true;
             }
         }
     }
